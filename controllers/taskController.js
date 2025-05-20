@@ -1,6 +1,6 @@
-const Task = require('../../models/taskModel.js');
+import Task from '../../models/taskModel.js';
 
-exports.createTask = async (req, res) => {
+export const createTask = async (req, res) => {
   try {
     const { title, description, status } = req.body;
     const userId = req.user.id;
@@ -12,7 +12,7 @@ exports.createTask = async (req, res) => {
   }
 };
 
-exports.getTasks = async (req, res) => {
+export const getTasks = async (req, res) => {
   try {
     const userId = req.user.id;
     const tasks = await Task.find({ userId });
@@ -22,7 +22,7 @@ exports.getTasks = async (req, res) => {
   }
 };
 
-exports.getTaskById = async (req, res) => {
+export const getTaskById = async (req, res) => {
   try {
     const { id } = req.params;
     const userId = req.user.id;
@@ -38,7 +38,7 @@ exports.getTaskById = async (req, res) => {
   }
 };
 
-exports.updateTask = async (req, res) => {
+export const updateTask = async (req, res) => {
   try {
     const { id } = req.params;
     const userId = req.user.id;
@@ -59,7 +59,7 @@ exports.updateTask = async (req, res) => {
   }
 };
 
-exports.partialUpdateTask = async (req, res) => {
+export const partialUpdateTask = async (req, res) => {
   try {
     const { id } = req.params;
     const userId = req.user.id;
@@ -80,7 +80,7 @@ exports.partialUpdateTask = async (req, res) => {
   }
 };
 
-exports.deleteTask = async (req, res) => {
+export const deleteTask = async (req, res) => {
   try {
     const { id } = req.params;
     const userId = req.user.id;
