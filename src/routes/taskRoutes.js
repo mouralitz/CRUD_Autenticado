@@ -6,7 +6,7 @@ import {
   updateTask,
   partialUpdateTask,
   deleteTask
-} from '../controllers/taskController.js';
+} from '../controller/taskController.js';
 import verifyToken from '../middlewares/jwt.token.middleware.js';
 
 const router = express.Router();
