@@ -1,10 +1,9 @@
-import Task from '../../models/taskModel.js';
+const Task = require('../../models/taskModel.js');
 
-// Criar uma nova tarefa
 exports.createTask = async (req, res) => {
   try {
     const { title, description, status } = req.body;
-    const userId = req.user.id; // ID do usuário autenticado
+    const userId = req.user.id;
 
     const task = await Task.create({ title, description, status, userId });
     res.status(201).json(task);
@@ -13,7 +12,6 @@ exports.createTask = async (req, res) => {
   }
 };
 
-// Listar todas as tarefas do usuário autenticado
 exports.getTasks = async (req, res) => {
   try {
     const userId = req.user.id;
@@ -24,7 +22,6 @@ exports.getTasks = async (req, res) => {
   }
 };
 
-// Obter detalhes de uma tarefa
 exports.getTaskById = async (req, res) => {
   try {
     const { id } = req.params;
@@ -41,7 +38,6 @@ exports.getTaskById = async (req, res) => {
   }
 };
 
-// Atualizar uma tarefa (PUT)
 exports.updateTask = async (req, res) => {
   try {
     const { id } = req.params;
@@ -63,7 +59,6 @@ exports.updateTask = async (req, res) => {
   }
 };
 
-// Atualizar parcialmente uma tarefa (PATCH)
 exports.partialUpdateTask = async (req, res) => {
   try {
     const { id } = req.params;
@@ -85,7 +80,6 @@ exports.partialUpdateTask = async (req, res) => {
   }
 };
 
-// Deletar uma tarefa
 exports.deleteTask = async (req, res) => {
   try {
     const { id } = req.params;

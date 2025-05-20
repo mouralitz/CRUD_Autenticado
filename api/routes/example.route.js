@@ -1,15 +1,13 @@
-import express from 'express';
-import exampleController from '../controller/example.controller.js';
-import verifyToken from '../middleware/jwt.token.middleware.js';
+const express = require('express');
+const { createTask, getTasks } = require('../controllers/taskController.js');
+const verifyToken = require('../middleware/jwt.token.middleware.js');
 
 const router = express.Router();
 
 // Rota para criar uma nova tarefa
-router.post('/todos', (req, res, next) => {
-  if (!req.body.title) {
-    return res.status(400).json({ success: false, message: 'O título é obrigatório.' });
-  }
-  next();
-}, exampleController.createTodo);
+router.post('/todos', verifyToken, createTask);
 
-export default router;
+// Rota para obter todas as tarefas
+router.get('/todos', verifyToken, getTasks);
+
+module.exports = router;
