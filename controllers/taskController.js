@@ -1,4 +1,4 @@
-const Task = require('../models/taskModel');
+import Task from '../../models/taskModel.js';
 
 // Criar uma nova tarefa
 exports.createTask = async (req, res) => {
