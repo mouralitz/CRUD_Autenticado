@@ -14,7 +14,7 @@ app.use(express.json());
 
 app.use("/users", userRoute);
 app.use("/secureExampleRoute", exampleRoute);
-app.use("/api/tasks", taskRoutes); // Adiciona a rota de tarefas
+app.use("/tasks", taskRoutes); // Adiciona a rota de tarefas
 
 app.get('/', (req, res) => {
     res.send('Hello World!');
