@@ -1,3 +1,4 @@
+
 curl --request POST \
     --url 'https://crud-autenticado-coral.vercel.app/api/example/todos' \
     --header 'Content-Type: application/json' \
@@ -6,5 +7,3 @@ curl --request POST \
         "title": "Estudar Node.js",
         "description": "Assistir aulas e praticar exemplos."
     }'
-
-read -p "Pressione qualquer tecla para sair..."

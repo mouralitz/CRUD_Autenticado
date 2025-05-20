@@ -4,9 +4,6 @@ import verifyToken from '../middleware/jwt.token.middleware.js';
 
 const router = express.Router();
 
-// Rota para listar todas as tarefas
-router.get('/todos', verifyToken, exampleController.getTodos);
-
 // Rota para criar uma nova tarefa
 router.post('/todos', verifyToken, exampleController.createTodo);
 

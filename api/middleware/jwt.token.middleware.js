@@ -1,23 +1,19 @@
 import jwt from 'jsonwebtoken';
 
 const verifyToken = (req, res, next) => {
-    try {
-        const token = req.headers['authorization']?.split(' ')[1];
-        if (!token) {
-            return res.status(401).json({ message: 'No token provided!' });
-        }
+  const token = req.header('Authorization')?.replace('Bearer ', '');
 
-        jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
-            if (err) {
-                return res.status(403).json({ message: 'Unauthorized!' });
-            }
-            req.userId = decoded.id;
-            next();
-        });
-    } catch (error) {
-        console.error("Error verifying token:", error);
-        return res.status(500).json({ message: 'Internal server error' });
-    };
-}
+  if (!token) {
+    return res.status(401).json({ success: false, message: 'Token não fornecido.' });
+  }
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = { id: decoded.id }; // Adiciona o ID do usuário ao objeto req
+    next();
+  } catch (error) {
+    res.status(401).json({ success: false, message: 'Token inválido.' });
+  }
+};
 
 export default verifyToken;
