@@ -1,14 +1,22 @@
-const express = require('express');
+import express from 'express';
+import {
+  createTask,
+  getTasks,
+  getTaskById,
+  updateTask,
+  partialUpdateTask,
+  deleteTask
+} from '../controllers/taskController.js';
+import verifyToken from '../middlewares/jwt.token.middleware.js';
+
 const router = express.Router();
-const taskController = require('../controllers/taskController');
-const authMiddleware = require('../middlewares/authMiddleware');
 
 // Rotas protegidas para tarefas
-router.post('/', authMiddleware, taskController.createTask);
-router.get('/', authMiddleware, taskController.getTasks);
-router.get('/:id', authMiddleware, taskController.getTaskById);
-router.put('/:id', authMiddleware, taskController.updateTask);
-router.patch('/:id', authMiddleware, taskController.partialUpdateTask);
-router.delete('/:id', authMiddleware, taskController.deleteTask);
+router.post('/', verifyToken, createTask);
+router.get('/', verifyToken, getTasks);
+router.get('/:id', verifyToken, getTaskById);
+router.put('/:id', verifyToken, updateTask);
+router.patch('/:id', verifyToken, partialUpdateTask);
+router.delete('/:id', verifyToken, deleteTask);
 
-module.exports = router;
+export default router;
