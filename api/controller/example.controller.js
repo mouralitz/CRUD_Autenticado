@@ -1,4 +1,4 @@
-const Task = require('../../models/taskModel.js');
+const Task = require('../models/taskModel.js');
 
 const todos = []; // Simulação de um banco de dados em memória
 

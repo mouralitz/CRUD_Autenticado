@@ -1,13 +1,21 @@
-import Task from '../../models/taskModel.js';
+import Task from '../models/taskModel.js';
 
 export const createTask = async (req, res) => {
   try {
+    console.log('Body recebido:', req.body);
+    console.log('Usuário autenticado:', req.user);
+
     const { title, description, status } = req.body;
-    const userId = req.user.id;
+    const userId = req.user?.id;
+
+    if (!title || !userId) {
+      return res.status(400).json({ message: 'Título e usuário são obrigatórios.' });
+    }
 
     const task = await Task.create({ title, description, status, userId });
     res.status(201).json(task);
   } catch (error) {
+    console.error('Erro ao criar tarefa:', error);
     res.status(500).json({ message: 'Erro ao criar a tarefa', error: error.message });
   }
 };
