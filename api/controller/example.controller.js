@@ -1,4 +1,4 @@
-import Task from '../../models/taskModel.js';
+const Task = require('../../models/taskModel.js');
 
 const todos = []; // Simulação de um banco de dados em memória
 
@@ -11,7 +11,7 @@ const getTodos = (req, res) => {
 const createTodo = async (req, res) => {
   try {
     const { title, description } = req.body;
-    const userId = req.user.id; // Certifique-se de que o middleware `verifyToken` adiciona `user` ao `req`
+    const userId = req.user?.id; // Certifique-se de que o middleware adiciona `user` ao `req`
 
     if (!title) {
       return res.status(400).json({ success: false, message: 'O título é obrigatório.' });
